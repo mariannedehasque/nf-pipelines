@@ -63,8 +63,9 @@ process ANGSD_EXTRACT_SITES {
     path all_mafs
 
     output:
-    path "${params.species}.sites.txt" , emit: sites
-    path "${params.species}.sites.txt.idx" , emit: sites_idx
+    path "${params.species}.sites.txt" , emit: snps
+    path "${params.species}.sites.txt.idx" , emit: snps_idx
+    path "${params.species}.sites.txt.bin" , emit: snps_bin
     path "${params.species}.regions" , emit: regions
     path "${params.species}.chrs" , emit: chrs
 

@@ -23,7 +23,7 @@ process COLLECT_BAM_POP {
     tuple val(pop), val(bams)
 
     output:
-    path "${pop}.bamlist.txt"
+    tuple val(pop), path("${pop}.bamlist.txt")
 
     script:
     """
