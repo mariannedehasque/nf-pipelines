@@ -15,6 +15,7 @@ include { ANGSD_GL_ALL; ANGSD_COLLECT_OUTPUT; ANGSD_EXTRACT_SITES } from './modu
 include { COLLECT_BAM_ALL; COLLECT_BAM_POP } from './modules/collect_bam'
 include { PCANGSD; PLOT_PCANGSD } from './modules/pcangsd'
 include { ANGSD_GL_POP } from './modules/angsd_gl_pop'
+include { ANGSD_DIVERSITY } from './modules/angsd_diversity'
 
 
 // --- Input Channels ---
@@ -24,10 +25,10 @@ include { ANGSD_GL_POP } from './modules/angsd_gl_pop'
 samples = Channel
     .fromPath(params.samplesheet, checkIfExists: true)
     .splitCsv(header: true)
-    .map { row -> tuple(row.sample, row.pop, row.bam) }
+    .map { row -> tuple(row.sample, row.pop, row.region, row.bam) }
 
 all_bams = samples
-    .map { sample, pop, bam -> bam }
+    .map { sample, pop, region, bam -> bam }
     .collect()
 
 contigs = Channel
@@ -71,12 +72,12 @@ workflow {
     // PCAngsd (optional)
     // pcangsd_cov = PCANGSD(collected.all_beagle)
     // PLOT_PCANGSD(pcangsd_cov, samplesheet_file)
-    ANGSD_GL_POP(
-    bamlist_pop,
-    snps,
-    bin,
-    idx,
-    regions)
+    
+    ANGSD_GL_POP(bamlist_pop,snps, bin,idx,regions)
+
+    ANGSD_DIVERSITY(ANGSD_GL_POP.out.saf_files)
+
+
     
 
 }
