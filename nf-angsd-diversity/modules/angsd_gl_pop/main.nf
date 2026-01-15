@@ -10,11 +10,9 @@ process ANGSD_GL_POP {
     path regions
 
     output:
-    path "${pop}.saf.idx", emit: saf_idx
-    path "${pop}.saf.gz", emit: saf
+    tuple val(pop), path("${pop}.saf.gz"), path("${pop}.saf.idx"), path("${pop}.saf.pos.gz"), emit: saf_files
     path "${pop}.beagle.gz", emit: beagle
     path "${pop}.mafs.gz", emit: mafs
-    path "${pop}.pos.gz", emit: pos
 
     script:
     """
