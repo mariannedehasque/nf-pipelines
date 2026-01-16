@@ -10,7 +10,6 @@ params.split_script = "${projectDir}/scripts/split_reads.sh"
 params.rmdup_script = "${projectDir}/scripts/samremovedup.py"
 params.amber_script = "/home/mdehasqu/TOOLS/AMBER/AMBER"
 params.bwa_threads  = 4
-params.seed_disable = 1024
 params.bam_q        = 1
 params.trimlength   = 85
 
@@ -171,7 +170,7 @@ process BWA_MERGED {
     def rg   = fields[2]
     
     """
-    bwa aln -l ${params.seed_disable} -t ${task.cpus} ${params.reference} ${merged_fq} > ${sample_id}.sai
+    bwa aln -l 16500 -n 0.01 -o 2  -t ${task.cpus} ${params.reference} ${merged_fq} > ${sample_id}.sai
     
     bwa samse -r "@RG\\tID:${rg}\\tSM:${name}\\tPL:ILLUMINA\\tLB:${name}_${lib}\\tPU:${rg}" \
         ${params.reference} ${sample_id}.sai ${merged_fq} \
@@ -197,8 +196,8 @@ process BWA_UNMERGED {
     def rg   = fields[2]
 
     """
-    bwa aln -l ${params.seed_disable} -t ${task.cpus} ${params.reference} ${r1} > ${sample_id}_R1.sai
-    bwa aln -l ${params.seed_disable} -t ${task.cpus} ${params.reference} ${r2} > ${sample_id}_R2.sai
+    bwa aln -l 16500 -n 0.01 -o 2  -t ${task.cpus} ${params.reference} ${r1} > ${sample_id}_R1.sai
+    bwa aln -l 16500 -n 0.01 -o 2  -t ${task.cpus} ${params.reference} ${r2} > ${sample_id}_R2.sai
 
     bwa sampe \
         -r "@RG\\tID:${rg}\\tSM:${name}\\tPL:ILLUMINA\\tLB:${name}_${lib}\\tPU:${rg}" \
