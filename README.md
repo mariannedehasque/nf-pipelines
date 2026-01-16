@@ -1,5 +1,7 @@
 ## Overview
-Repository to with custom nextflow pipelines. Pipelines were written for the WAHAB cluster.
+Repository to document custom nextflow pipelines. Pipelines were written for the WAHAB cluster.
+
+Documentation and testing still to be done.
 
 ## Content
 
@@ -9,7 +11,7 @@ nf-pipelines/
 ├── docs/
 │   ├── lab_notebook.md
 ├── nf-angsd-diversity/
-├── nf-trim-unmerged/
-└── nf-map-historical-unmerged/
+└── nf-trim-merged-unmerged/
+
 
 ```
