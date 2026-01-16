@@ -1,16 +1,16 @@
 nextflow.enable.dsl=2
 
 // --- Default Parameters ---
-params.samples_file = "${projectDir}/fastq_filenames.txt"
+params.samples_file = "${projectDir}/inputfiles/fastq_filenames.txt"
 params.indir        = "${projectDir}/data/symlinks"
 params.outdir       = "${projectDir}/results" 
-params.reference    = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.fasta"
-params.bed_file     = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.repma.bed"
+params.reference    = "${projectDir}/data/reference/<reference>.fasta"
+params.bed_file     = "${projectDir}/data/reference/<reference>.repma.bed"
 params.split_script = "${projectDir}/scripts/split_reads.sh"
 params.rmdup_script = "${projectDir}/scripts/samremovedup.py"
-params.amber_script = "/home/mdehasqu/TOOLS/AMBER/AMBER"
+params.amber_script = "/home/mdehasqu/TOOLS/AMBER/AMBER" // Ignore this.
 params.bwa_threads  = 4
-params.bam_q        = 1
+params.bam_q        = 1 // Mapping quality. Currently set to 1 simply to remove unmapped reads. 
 params.trimlength   = 85
 
 // --- Input Channel ---
