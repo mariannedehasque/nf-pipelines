@@ -2,13 +2,13 @@ nextflow.enable.dsl=2
 
 // Default Parameters
 params.samplesheet = "${projectDir}/inputfiles/samplesheet.csv"
-params.contigs     = "${projectDir}/inputfiles/contigs.txt"
+params.contigs     = "${projectDir}/inputfiles/reference.denovoSSL.Tzo20k.contigs.txt"
 params.outdir      = "${projectDir}/results"
 params.reference   = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.fasta"
 params.bed_file    = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.repma.angsd.txt"
 params.species     = "Tzo"
-params.maxdepth    = 10000
-params.minind      = 3
+params.maxdepth    = 5700
+params.minind      = 95
 
 // import modules
 include { ANGSD_GL_ALL; ANGSD_COLLECT_OUTPUT; ANGSD_EXTRACT_SITES } from './modules/angsd_gl'
@@ -39,7 +39,7 @@ contigs = Channel
 
 pop_bams = samples
     .groupTuple(by: 1)
-    .map { samples, pop, bams -> tuple(pop, bams)}
+    .map { samples, pop, regions, bams -> tuple(pop, bams)}
 
 // Workflow 
 
@@ -70,8 +70,8 @@ workflow {
     regions = sites.regions
 
     // PCAngsd (optional)
-    // pcangsd_cov = PCANGSD(collected.all_beagle)
-    // PLOT_PCANGSD(pcangsd_cov, samplesheet_file)
+     pcangsd_cov = PCANGSD(collected.all_beagle)
+     PLOT_PCANGSD(pcangsd_cov, samplesheet_file)
     
     ANGSD_GL_POP(bamlist_pop,snps, bin,idx,regions)
 
