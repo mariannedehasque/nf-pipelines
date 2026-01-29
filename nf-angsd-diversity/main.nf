@@ -2,13 +2,13 @@ nextflow.enable.dsl=2
 
 // Default Parameters
 params.samplesheet = "${projectDir}/inputfiles/samplesheet.csv"
-params.contigs     = "${projectDir}/inputfiles/reference.denovoSSL.Tzo20k.contigs.txt"
+params.contigs     = "${projectDir}/data/reference/reference.contigs.txt"
 params.outdir      = "${projectDir}/results"
-params.reference   = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.fasta"
-params.bed_file    = "${projectDir}/data/reference/reference.denovoSSL.Tzo20k.repma.angsd.txt"
-params.species     = "Tzo"
-params.maxdepth    = 5700
-params.minind      = 95
+params.reference   = "${projectDir}/data/reference/reference.fasta"
+params.bed_file    = "${projectDir}/data/reference/reference.repma.angsd.txt"
+params.species     = "Sor"
+params.maxdepth    = 1000
+params.minind      = 20
 
 // import modules
 include { ANGSD_GL_ALL; ANGSD_COLLECT_OUTPUT; ANGSD_EXTRACT_SITES } from './modules/angsd_gl'
@@ -25,10 +25,10 @@ include { ANGSD_DIVERSITY } from './modules/angsd_diversity'
 samples = Channel
     .fromPath(params.samplesheet, checkIfExists: true)
     .splitCsv(header: true)
-    .map { row -> tuple(row.sample, row.pop, row.region, row.bam) }
+    .map { row -> tuple(row.sample, row.pop, row.era,row.region, row.bam) }
 
 all_bams = samples
-    .map { sample, pop, region, bam -> bam }
+    .map { sample, pop, era, region, bam -> bam }
     .collect()
 
 contigs = Channel
@@ -38,8 +38,8 @@ contigs = Channel
     .filter { it }
 
 pop_bams = samples
-    .groupTuple(by: 1)
-    .map { samples, pop, regions, bams -> tuple(pop, bams)}
+    .groupTuple(by: [1, 2])
+    .map { samples, pop, era, regions, bams -> tuple(pop, era, bams)}
 
 // Workflow 
 

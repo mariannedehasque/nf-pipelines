@@ -16,17 +16,17 @@ process COLLECT_BAM_ALL {
 
 process COLLECT_BAM_POP {
 
-    tag { pop }
+    tag { "${pop}_${era}" }
     publishDir "${params.outdir}/inputfiles", mode: 'copy'
 
     input:
-    tuple val(pop), val(bams)
+    tuple val(pop), val(era), val(bams)
 
     output:
-    tuple val(pop), path("${pop}.bamlist.txt")
+    tuple val(pop), val(era), path("${pop}.${era}.bamlist.txt")
 
     script:
     """
-    printf '%s\\n' ${bams.join(' ')} | head -c -1 > ${pop}.bamlist.txt
+    printf '%s\\n' ${bams.join(' ')} | head -c -1 > ${pop}.${era}.bamlist.txt
     """
 }

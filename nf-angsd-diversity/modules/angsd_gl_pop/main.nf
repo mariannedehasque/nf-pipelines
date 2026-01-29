@@ -1,18 +1,18 @@
 process ANGSD_GL_POP {
-    tag { pop }
+    tag { "${pop}_${era}" }
     publishDir "${params.outdir}/angsd_pop", mode: 'copy'
 
     input:
-    tuple val(pop), path(bamlist)
+    tuple val(pop), val (era), path(bamlist)
     path snps
     path bin
     path idx
     path regions
 
     output:
-    tuple val(pop), path("${pop}.saf.gz"), path("${pop}.saf.idx"), path("${pop}.saf.pos.gz"), emit: saf_files
-    path "${pop}.beagle.gz", emit: beagle
-    path "${pop}.mafs.gz", emit: mafs
+    tuple val(pop), val(era), path("${pop}_${era}.saf.gz"), path("${pop}_${era}.saf.idx"), path("${pop}_${era}.saf.pos.gz"), emit: saf_files
+    path "${pop}_${era}.beagle.gz", emit: beagle
+    path "${pop}_${era}.mafs.gz", emit: mafs
 
     script:
     """
@@ -30,6 +30,6 @@ process ANGSD_GL_POP {
         -anc ${params.reference} \
         -sites ${snps} \
         -rf ${regions} \
-        -out ${pop}
+        -out ${pop}_${era}
     """
 }
