@@ -130,8 +130,8 @@ process SEQTK_TRIM {
 
     script:
     """
-    seqtk trimfq -L 85 ${r1} | gzip > ${sample_id}_R1_trimmed.L${params.trimlength}.fastq.gz
-    seqtk trimfq -L 85 ${r2} | gzip > ${sample_id}_R2_trimmed.L${params.trimlength}.fastq.gz
+    seqtk trimfq -L ${params.trimlength} ${r1} | gzip > ${sample_id}_R1_trimmed.L${params.trimlength}.fastq.gz
+    seqtk trimfq -L ${params.trimlength} ${r2} | gzip > ${sample_id}_R2_trimmed.L${params.trimlength}.fastq.gz
     """
 }
 
