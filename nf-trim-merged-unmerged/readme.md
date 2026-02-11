@@ -11,6 +11,7 @@ This pipeline trims fastq files and maps using ancient DNA-specific settings. It
 The pipeline requires the following inputfiles:
 
 * Reference (fasta or fna format)
+* Reference index files (.bwt, .ann, .sa, .pac, .ann, .amb )
 * BED file with masked repeat regions
 * File with the name of all fastq files to be processed 
 * Directory containing all fastq files
@@ -36,12 +37,13 @@ ln -s /Generode/data/raw_reads_symlinks/modern/*fastq.gz ./data/symlinks
 
 # Create fastq filenames file. Manually adjust the file if necessary (e.g. if not all samples from GenErode are to be used)
 
-ls ./data/symlinks/*fastq.gz xargs -n1 basename | cut -d "_" -f1,2,3 | uniq > ./inputfiles/fastq_filenames.txt
+ls ./data/symlinks/*fastq.gz | xargs -n1 basename | cut -d "_" -f1,2,3 | uniq > ./inputfiles/fastq_filenames.txt
 
 # Create softlinks to reference and repma bed file
 # Adjust the path to the reference if necessary
 
 ln -s /Generode/reference/<reference>.fasta ./data/reference/
+ln -s /Generode/reference/<reference>.fasta.* ./data/reference/
 ln -s /Generode/reference/<reference>.repma.bed ./data/reference/
 
 ```
