@@ -56,7 +56,7 @@ process FASTP_MERGED {
       --merged_out=${sample_id}_trimmed_merged.fastq.gz \
       -o ${sample_id}_R1_unmerged.fq.gz -O ${sample_id}_R2_unmerged.fq.gz \
       -h ${sample_id}_fastp_report.html -j ${sample_id}_fastp_report.json \
-      -R "${sample_id}" -w ${task.cpus} -l 30
+      -R "${sample_id}" -w ${task.cpus} -l 30 --overlap_diff_limit 1 --overlap_len_require 11
     """
 }
 
