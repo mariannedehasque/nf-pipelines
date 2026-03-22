@@ -2,6 +2,19 @@
 
 This pipeline trims fastq files and maps using ancient DNA-specific settings. It is written in Nextflow DSL2 and designed to be run on Old Dominion WAHAB cluster. The pipeline uses the same symbolic filename structure as the GenErode pipeline.
 
+**Important for WAHAB HPC** For nextflow to correctly install conda environments, a personal conda installation is necessary. Installation instruction for miniconda (my personal favorite) and how to use it can be found [here](https://www.anaconda.com/docs/getting-started/miniconda/main)
+
+## Installation
+
+The pipeline can be installed directly from git
+
+```bash
+
+git clone https://github.com/mariannedehasque/nf-pipelines.git
+
+```
+This GitHub repository also contains the `nf-mapping-ancient-merged` and `nf-angsd-diversity` nextflow pipelines.
+
 ## Folder structure
 
 ## Parameters
