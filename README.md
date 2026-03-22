@@ -1,7 +1,7 @@
 ## Overview
 Repository to document custom nextflow pipelines. Pipelines were written for the WAHAB cluster.
 
-Documentation and testing still to be done.
+Documentation and testing is work in progress.
 
 ## Content
 
