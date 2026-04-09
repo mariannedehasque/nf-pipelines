@@ -29,7 +29,7 @@ The pipeline requires the following inputfiles:
 * File with the name of all fastq files to be processed 
 * Directory containing all fastq files
 
-All inputfiles can be copied or generated from the GenErode directory.
+All inputfiles can be copied or generated from the GenErode directory. Below is the code I used to generate the inputfiles.
 
 ```bash
 # Activate bash shell
@@ -60,6 +60,10 @@ ln -s /Generode/reference/<reference>.fasta.* ./data/reference/
 ln -s /Generode/reference/<reference>.repma.bed ./data/reference/
 
 ```
+
+**Important** The pipeline assumes that fastq files are named in the following way: 
+<sampleID>_<index>_<flowcellID> eg. TzoCMta031_1_22CVWFLT3L3
+Make sure that all fastq file names are unique and follow this structure. Otherwise the pipeline will fail.
 
 ### Configuration
 
