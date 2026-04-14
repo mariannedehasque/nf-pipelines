@@ -2,6 +2,8 @@
 
 This pipeline calculates diversity estimates within the ANGSD frameowork. It is written in Nextflow DSL2 and designed to be run on Old Dominion WAHAB cluster. The pipeline starts from BAM files.
 
+**Important for WAHAB HPC:** For nextflow to correctly install conda environments, a personal conda installation is necessary. Installation instruction for miniconda (my personal favorite) and how to use it can be found [here](https://www.anaconda.com/docs/getting-started/miniconda/main)
+
 ## Folder structure
 
 ## Installation
