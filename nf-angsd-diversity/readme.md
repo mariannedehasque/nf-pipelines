@@ -49,12 +49,12 @@ Important:
 ### ANGSD sites file
 The ANGSD sites file contains information on the sites that will be analyzed. We will use this file to remove repeat regions from the analysis. This files corresponds to the `-sites` flag in [ANGSD](https://www.popgen.dk/angsd/index.php/Sites).
 
-To create the sites file from the GenErode output:
+To create the sites file from the GenErode output (after loading all modules):
 
 ```bash
 awk '{print $1"\t"$2+1"\t"$3}' ./path/to/reference/reference.repma.bed > ./path/to/reference/reference.repma.angsd.txt
 
-angsd index ./path/to/reference/reference.repma.angsd.txt
+angsd sites index ./path/to/reference/reference.repma.angsd.txt
 ```
 
 ### Bam inputfile
