@@ -36,7 +36,6 @@ Channel
 
 process FASTP_MERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/fastq", mode: 'copy', pattern: "*.fastq.gz"
     publishDir "${params.outdir}/data/stats", mode: 'copy', pattern: "*.{html,json}"
 
     input:
@@ -95,7 +94,6 @@ process QC_MERGED {
 
 process FASTP_UNMERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/fastq", mode: 'copy', pattern: "*.trimmed.fq.gz"
     publishDir "${params.outdir}/data/stats", mode: 'copy', pattern: "*.{html,json}"
 
     input:
@@ -155,7 +153,6 @@ process QC_UNMERGED {
 
 process BWA_MERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/bam", mode: 'copy'
 
     input:
     tuple val(sample_id), path(merged_fq)
@@ -181,7 +178,6 @@ process BWA_MERGED {
 
 process BWA_UNMERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/bam", mode: 'copy'
 
     input:
     tuple val(sample_id), path(r1), path(r2)
@@ -209,7 +205,6 @@ process BWA_UNMERGED {
 
 process MARKDUP_MERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/bam", mode: 'copy'
 
     input:
     tuple val(sample_id), path(merged_bam)
@@ -225,7 +220,6 @@ process MARKDUP_MERGED {
 
 process MARKDUP_UNMERGED {
     tag "$sample_id"
-    publishDir "${params.outdir}/data/bam", mode: 'copy'
 
     input:
     tuple val(sample_id), path(unmerged_bam)
@@ -247,7 +241,6 @@ process MARKDUP_UNMERGED {
 
 process MERGE_BAMS {
     tag "$sample_name"
-    publishDir "${params.outdir}/data/bam", mode: 'copy'
 
     input:
     tuple val(sample_name), path(bams)
