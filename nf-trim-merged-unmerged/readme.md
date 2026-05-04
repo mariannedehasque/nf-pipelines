@@ -62,7 +62,7 @@ ln -s /Generode/reference/<reference>.repma.bed ./data/reference/
 ```
 
 **Important** The pipeline assumes that fastq files are named in the following way: 
-<sampleID>_<index>_<flowcellID> eg. TzoCMta031_1_22CVWFLT3L3
+<sampleID>_<index>_<flowcellID>_R1.fastq.gz eg. TzoCMta031_1_22CVWFLT3_R1.fastq.gz
 Make sure that all fastq file names are unique and follow this structure. Otherwise the pipeline will fail.
 
 ### Configuration
